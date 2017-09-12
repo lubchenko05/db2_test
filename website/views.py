@@ -193,7 +193,7 @@ def about(request):
 @verify_required
 def create_post(request):
     if request.method == 'POST':
-        form = PostCreateForm(request.POST, request.FILES or None)
+        form = PostCreateForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.owner = request.user
