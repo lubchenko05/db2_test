@@ -141,7 +141,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 
                 Regards, Yuri!
                 ''' % profile.verified_code
-            send_mail(text, 'Verify code', settings.EMAIL_HOST_USER, [instance.email])
+            send_mail('Verify code', text, from_email=settings.EMAIL_HOST_USER, recipient_list=[instance.email, ])
         except:
             print("Unable to send the email. Error: ", sys.exc_info()[0])
 
