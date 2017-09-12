@@ -39,7 +39,7 @@
       <div class="caption">
         <p>{{ post.text| slice:":300"}}</p>
           <div class="row">
-          <div class="col-md-6"><a href="#" class="btn btn-primary " role="button">More</a>
+          <div class="col-md-6"><a href="/post/{{ post.pk }}" class="btn btn-primary " role="button">More</a>
            {% if not liked %}
                     <a href="{% url 'like' pk=post.id %}" class="btn btn-success" role="button" aria-pressed="true">Like</a>
                 {% else %}
