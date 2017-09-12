@@ -1,0 +1,27 @@
+{% extends 'website/base.html' %}
+{% block content %}
+    <div style="background-color: ghostwhite; padding: 30px; margin-top: 30px; border-radius: 20px;" class="row justify-content-center">
+  {% if request.user %}
+            <div class="row">
+            <div class="col-sm-6">
+                <b>task4</b> &nbsp;|&nbsp; <a href="{% url 'about' %}">About</a>
+            </div>
+            <div class="col-sm-6">
+            <div class="text-right">
+        {{ request.user.email }} &nbsp;|&nbsp; <a href="{% url 'logout' %}">Sign Out</a>
+            </div>
+            </div>
+            </div>
+    {% endif %}
+        <div class="col container">
+  <form method="post"  enctype = "multipart/form-data" >
+  {% csrf_token %}
+          {{ form.as_p }}
+      <button type="submit" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px;"><b>Finish</b></button>
+  </form>
+            </div>
+    </div>
+            <div class="row justify-content-center">
+        <h6><a href="{% url 'logout' %}">Sign Out</a></h6>
+    </div>
+{% endblock %}

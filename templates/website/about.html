@@ -1,0 +1,31 @@
+{% extends 'website/base.html' %}
+{% block content %}
+    {% if request.user %}
+            <div class="row">
+            <div class="col-sm-6">
+                <b>task4</b> &nbsp;|&nbsp; <a href="{% url 'home' %}">Home</a>
+            </div>
+            <div class="col-sm-6">
+            <div class="text-right">
+        {{ request.user.email }} &nbsp;|&nbsp; <a href="{% url 'logout' %}">Sign Out</a>
+            </div>
+            </div>
+            </div>
+    {% endif %}
+    <h1>About</h1>
+    <p>
+    &nbsp;&nbsp;&nbsp;&nbsp;Web-based django application with custom user model
+        (custom fields: birthday, country, city).<br>
+    Each user need to be able to sign-up/sign-in via email/password. (also sign-out)<br>
+    After sign-up user will get an confirmation email with verification code(or link, or both).<br>
+    Only after verify email he can sign in to the website.<br>
+    Website must be protected from anonymous users and be available only for logged users.<br>
+    On the main page:<br>
+    - show all list Posts(e.g. title/body/image etc) with pagination. That list also need to have sorting form.
+        (Country, city, search by keyword)<br>
+    - below each post user see number of the likes and the "like" button which add +1 like.
+        User can like post only once, then it marked as liked, but he can to delete his like, and like again and so on.
+        (Reference to social network likes.)<br>
+    - User can go to a single post page and see the post details and comments to the post also with pagination.<br>
+    </p>
+{% endblock %}

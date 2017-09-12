@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     # http://whitenoise.evans.io/en/stable/django.html#using-whitenoise-in-development
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'root',
+    'website',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +124,11 @@ ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+AUTH_USER_MODEL = 'root.User'
+AUTH_PROFILE_MODULE = 'root.Profile'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = [

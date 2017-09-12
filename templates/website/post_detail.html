@@ -1,0 +1,86 @@
+{% extends 'website/base.html' %}
+{% block content %}
+        {% if request.user %}
+            <div class="row">
+            <div class="col-sm-6">
+                <b>task4</b> &nbsp;|&nbsp; <a href="{% url 'about' %}">About</a>
+            </div>
+            <div class="col-sm-6">
+            <div class="text-right">
+        {{ request.user.email }} &nbsp;|&nbsp; <a href="{% url 'logout' %}">Sign Out</a>
+            </div>
+            </div>
+            </div>
+    {% endif %}
+    <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+    <div class="thumbnail">
+    <h3 class="text-center">{{ post.title }}</h3>
+        <img src="{{ post.image.url }}" alt="...">
+      <div class="caption">
+        <p>{{ post.text| slice:":300"}}</p>
+          <div class="row">
+          <div class="col-md-6">
+           {% if not liked %}
+                    <a href="{% url 'like' pk=post.id %}" class="btn btn-success" role="button" aria-pressed="true">Like</a>
+                {% else %}
+                    <a href="{% url 'dislike' pk=post.id %}" class="btn btn-danger" role="button" aria-pressed="true">Dislike</a>
+                {% endif %}
+          </div>
+    <div class="col-md-6 text-right">
+        Likes:&nbsp;{{ post.likes_count }} &nbsp;|&nbsp;Author:&nbsp;{{ post.owner.email }}
+    </div>
+              <div class="col-md-6 text-right">
+        Country:&nbsp;{{ post.owner.get_profile.country }} &nbsp;|&nbsp;City:&nbsp;{{ post.owner.get_profile.city }}
+    </div>
+         <div class="col-sm-12 text-center" style="margin-top: 20px;">
+             <form method="post">
+                 {% csrf_token %}
+            {{ form.text }}
+                 <button type="submit" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px;">
+                     <b>Send</b></button>
+             </form>
+                      <div class="row" style="margin-top: 20px">
+            {% for comment in comments %}
+                <div class="jumbotron">
+                <h6 class="text-left">{{ comment.owner.email }}</h6>
+                <div class="container">
+                     <p>{{ comment.text }}</p>
+                </div>
+                </div>
+            {% endfor %}
+         </div>
+        </div>
+  </div>
+      </div>
+         </div>
+    </div>
+    </div>
+    {% if comments.has_other_pages %}
+    <footer class="navbar-default navbar-static-bottom">
+  <div class="container-fluid">
+        <div class="col-md-12 text-center">
+  <ul class="pagination">
+    {% if comments.has_previous %}
+      <li><a href="?page={{ comments.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in comments.paginator.page_range %}
+      {% if comments.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if comments.has_next %}
+      <li><a href="?page={{ comments.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+    </div>
+      </div>
+</footer>
+{% endif %}
+{% endblock %}

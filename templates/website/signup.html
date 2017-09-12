@@ -1,0 +1,17 @@
+{% extends 'website/base.html' %}
+{% block content %}
+    <div style="background-color: ghostwhite; padding: 30px; margin-top: 30px; border-radius: 20px;" class="row justify-content-center">
+
+    <h1 class="col-sm-12" style="margin-bottom:30px;">Sign Up</h1>
+        <div class="col container">
+  <form method="post">
+  {% csrf_token %}
+          {{ form.as_p }}
+      <button type="submit" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px;"><b>Finish</b></button>
+  </form>
+            </div>
+    </div>
+        <div class="row text-center">
+        <h6>Already registered on this site? <a href="{% url 'login' %}">Sign In</a></h6>
+    </div>
+{% endblock %}
