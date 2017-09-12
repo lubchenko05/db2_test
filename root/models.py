@@ -6,12 +6,15 @@ import sys
 from email.mime.text import MIMEText
 
 from django.contrib.auth import get_user_model
+from django.core.mail import send_mail
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import BaseUserManager
+
+from db2_test4 import settings
 
 
 class MyUserManager(BaseUserManager):
@@ -138,15 +141,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 
                 Regards, Yuri!
                 ''' % profile.verified_code
-            msg = MIMEText(text, 'plain')
-            msg['Subject'] = "Verify code"
-            with smtplib.SMTP('smtp.mail.ru', 465) as s:
-                s.ehlo()
-                s.starttls()
-                s.ehlo()
-                s.login('lubchenko05@mail.ru', 'ms12777NS1epXhU')
-                s.sendmail('lubchenko05@gmail.ru', [instance.email, ], msg.as_string())
-                s.close()
+            send_mail(text, 'Verify code', settings.EMAIL_HOST_USER, [instance.email])
         except:
             print("Unable to send the email. Error: ", sys.exc_info()[0])
 

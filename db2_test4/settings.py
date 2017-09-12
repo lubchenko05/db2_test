@@ -130,6 +130,11 @@ MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = 'root.User'
 AUTH_PROFILE_MODULE = 'root.Profile'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "lubchenko05@gmail.com"
+EMAIL_HOST_PASSWORD = "ms12777NS1epXhU"
+EMAIL_USE_TLS = True
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = [
