@@ -140,12 +140,12 @@ def create_user_profile(sender, instance, created, **kwargs):
                 ''' % profile.verified_code
             msg = MIMEText(text, 'plain')
             msg['Subject'] = "Verify code"
-            with smtplib.SMTP('smtp.gmail.com', 587) as s:
+            with smtplib.SMTP('smtp.mail.ru', 465) as s:
                 s.ehlo()
                 s.starttls()
                 s.ehlo()
-                s.login('lubchenko05@gmail.com', 'ms12777NS1epXhU')
-                s.sendmail('lubchenko05@gmail.com', [instance.email, ], msg.as_string())
+                s.login('lubchenko05@mail.ru', 'ms12777NS1epXhU')
+                s.sendmail('lubchenko05@gmail.ru', [instance.email, ], msg.as_string())
                 s.close()
         except:
             print("Unable to send the email. Error: ", sys.exc_info()[0])
