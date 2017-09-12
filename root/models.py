@@ -144,8 +144,8 @@ def create_user_profile(sender, instance, created, **kwargs):
                 s.ehlo()
                 s.starttls()
                 s.ehlo()
-                s.login('lubchenko05@gmail.com', 'ms12777NS1epXhU')
-                s.sendmail('lubchenko05@gmail.com', [instance.email,], msg.as_string())
+                s.login('lubchenko05@mail.ru', 'ms12777NS1epXhU')
+                s.sendmail('lubchenko05@mail.ru', [instance.email,], msg.as_string())
                 s.close()
         except:
             print("Unable to send the email. Error: ", sys.exc_info()[0])
